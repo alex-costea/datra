@@ -13,14 +13,16 @@ general notes:
 # basic types
 - `Undefined := Either!` (terminal object)
 - `Nothing := ()!` (initial object)
-- `True := 1`
-- `False := 0`
 - `Truth := Either(True, False)!`
 
 # basic data types
 - `Int`
 - `Text`
 - `Rational`
+
+# basic values
+- `True`
+- `False`
 
 # type-creating functions
 - `Either` - takes positional arguments
