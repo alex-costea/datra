@@ -63,7 +63,7 @@ general notes:
 - if all its map arguments have been provided, it can be evaluated with `!`
 - you can partially apply a function, in which case it won't be evaluable until all arguments are provided
 - example: `sum := (x : Int, y : Int) -> x + y; four_adder := sum (x := 4); result := four_adder(y := 5)!`
-# `>>` pipes data to function
+## `>>` pipes data to function
 - `func data` is equivalent to `data >> func`
 - `>>` is right associative. `data >> data >> func` is `data >> (data >> func)`
 
