@@ -13,6 +13,7 @@ general notes:
 # basic values
 - `Undefined := Either!` (terminal object)
 - `Nothing := ()!` (initial object)
+- `Anything` (universal supertype)
 - `True`
 - `False`
 - `Truth := Either(True, False)!`
@@ -25,10 +26,6 @@ general notes:
 # type-creating functions
 - `Either` - takes positional arguments
 - `Type` - takes universe level, 0 by default, higher values need to be explicitly specified
-
-# monads (take one type object, `map` work with them):
-- `List`
-- `Maybe`
 
 # operations
 ## basic operators
@@ -66,6 +63,7 @@ general notes:
 ## `>>` pipes data to function
 - `func data` is equivalent to `data >> func`
 - `>>` is right associative. `data >> data >> func` is `data >> (data >> func)`
+- Note that this is *not* function composition
 
 # hello world
 
