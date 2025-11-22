@@ -2,6 +2,8 @@
 
 a language for data transformations.
 
+this is an extremely wip sketch of the language's functionality.
+
 general notes:
 - everything is lazy evaluated
 - everything is functional. mutation and variables do not exist
