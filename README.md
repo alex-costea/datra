@@ -31,9 +31,13 @@ general notes:
 - `Maybe`
 
 # operations
-## `+`, `-`, `*`, `/` with their usual senses
-## `!` forces evaluation of a function
+## basic operators
+- `+`, `-`, `*`, `/`, `=`, `=/=`, `>`, `>=`, `<`, `<=` with their usual senses
+- `+` also for string concatenation
+- `Int` \ `Int` is `Int`. if one of the operators is Float, it is Float
+## `!` evaluates a function
 - applying a map to a function does not ever automatically evaluate a function
+- note that this doesn't necessarily break the laziness. `a := f b!` will still wait for `a` itself to be evaluated
 ## `()` creates a map
 - maps have keys and values: `(identifier1 := 1, identifier2 := 2)`
 - they maintain their ordering, but it doesn't have semantic effect
@@ -59,9 +63,9 @@ general notes:
 - if all its map arguments have been provided, it can be evaluated with `!`
 - you can partially apply a function, in which case it won't be evaluable until all arguments are provided
 - example: `sum := (x : Int, y : Int) -> x + y; four_adder := sum (x := 4); result := four_adder(y := 5)!`
-# `|` pipes data to function
-- `func data` is equivalent to `data | func`
-- `|` is right associative. `data | data | func` is `data | (data | func)`
+# `>>` pipes data to function
+- `func data` is equivalent to `data >> func`
+- `>>` is right associative. `data >> data >> func` is `data >> (data >> func)`
 
 # hello world
 
@@ -77,9 +81,9 @@ the function called `main` is automatically applied at runtime
 main := (n : Int) -> do
     list := 1...n+1
     mapping := map(
-        (x -> x % 15 == 0, "FizzBuzz") |
-        (x -> x % 5 == 0, "Buzz") |
-        (x -> x % 3 == 0, "Fizz") |
+        (x -> x % 15 == 0, "FizzBuzz") >>
+        (x -> x % 5 == 0, "Buzz") >>
+        (x -> x % 3 == 0, "Fizz") >>
         switch
     )
     return mapping list!
