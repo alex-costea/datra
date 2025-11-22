@@ -10,19 +10,17 @@ general notes:
 - everything is a function and a map, depending on context
 - types are regular values
 
-# basic types
+# basic values
 - `Undefined := Either!` (terminal object)
 - `Nothing := ()!` (initial object)
+- `True`
+- `False`
 - `Truth := Either(True, False)!`
 
 # basic data types
 - `Int`
 - `Text`
 - `Rational`
-
-# basic values
-- `True`
-- `False`
 
 # type-creating functions
 - `Either` - takes positional arguments
