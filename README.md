@@ -29,9 +29,6 @@ general notes:
 - `and`, `or, `not` likewise
 - `+` also for text concatenation
 - `Int` \ `Int` is `Int`. if one of the operators is Float, it is Float
-## `!` evaluates a function
-- applying a map to a function does not ever automatically evaluate a function
-- note that this doesn't necessarily break the laziness. `a := f b!` will still wait for `a` itself to be evaluated
 ## `()` creates a map
 - maps have keys and values: `(identifier1 := 1, identifier2 := 2)`
 - they maintain their ordering, but it doesn't have semantic effect
@@ -58,13 +55,24 @@ general notes:
 - identifier names from the origin map can be used automatically
 - all arguments in a function body are within the map `arg`, which can also be treated as a function: `*Int -> 2 * arg(0)!`
 - function subtyping is contravariant on input map and covariant on output map
+- ## `!` evaluates a function
+- applying a map to a function does not ever automatically evaluate a function
+- note that this doesn't necessarily break the laziness. `a := f b!` will still wait for `a` itself to be evaluated
+- if and only if all its map arguments have been provided, it can be evaluated with `!`
+- more specifically: all maps and functions can be partially defined or completely defined. only completely defined values are `!`-able
 ## `f m` applies a map to a function
-- if all its map arguments have been provided, it can be evaluated with `!`
 - you can partially apply a function, in which case it won't be evaluable until all arguments are provided
+- the decoupling of application and evaluation allows completed functions to exist independently of its evaluation time
 - example: `sum := (x : Int, y : Int) -> x + y; four_adder := sum (x := 4); result := four_adder(y := 5)!`
 ## `><` concatenates two maps
 - if there is overlap, values from the second map override values from the first map
 ## `*type` is sugar for `(0 : type)`
+
+# io
+- `datra` is not a general purpose language. it can only be used for data transformation, as a CLI tool
+- the `main` function is automatically executed at runtime, using data from the CLI (either piped or through arguments)
+- data is also sent to output automatically, which can be unix piped to a file or another script
+- input and output data is serialized from / to JSON. while it's far from a flawless language, it is universally supported
 
 # emergent features
 - when a function  `*[Int | Text] -> *Truth` is defined using a map, you get pattern matching:
@@ -80,3 +88,8 @@ my_func : *[Int | Text] -> *Truth := (
 - since functions are maps, `*Int -> 2 * arg(0)!` is also the map `(0: 0, 1 : 2, 2 : 4, ...)`
 - `(x : Text) >< (Int -> [Int | Nothing]) -> Nothing` can take an arbitrary number of positional args
 - similarly `(x : Text) >< (Text -> [Int | Nothing]) -> Nothing` can take any identifier - value pairs
+
+# hello world
+```
+main := "hello, datra!"
+```
